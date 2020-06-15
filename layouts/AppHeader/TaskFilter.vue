@@ -36,9 +36,10 @@ button {
   padding: 0.5rem 1rem;
   cursor: pointer;
   display: inline-block;
-  border: 1px solid #ffffff;
-  color: #ffffff;
+  border: 1px solid;
   border-radius: 5px;
+  background-color: transparent;
+  margin: 0 0.5rem;
 }
 
 button:focus {
@@ -46,19 +47,23 @@ button:focus {
 }
 
 .all {
-  background-color: #1ba9f5;
+  color: #1ba9f5;
+  border-color: #1ba9f5;
 }
 
 .done {
-  background-color: #7de2d1;
+  color: #7de2d1;
+  border-color: #7de2d1;
 }
 
 .remain {
-  background-color: #ffce7a;
+  color: #ffce7a;
+  border-color: #ffce7a;
 }
 
 .disabled {
-  background-color: #d2d2d2 !important;
+  color: #d2d2d2 !important;
+  border-color: #d2d2d2 !important;
 }
 
 .current {
@@ -85,6 +90,6 @@ button:focus {
 label {
   margin: 0 1rem;
   font-size: 0.75rem;
-  color: #d2d2d2;
+  color: #535966;
 }
 </style>

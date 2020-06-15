@@ -4,7 +4,7 @@ export const dataMockUp = {
       id: 2,
       title: "Code SSR App",
       exp: { day: "16", year: 2020, time: "16:30" },
-      completed: true,
+      completed: false,
       expired: false,
       tasks: [
         { taskTitle: "Learn NuxtJS or NextJS", isDone: true },

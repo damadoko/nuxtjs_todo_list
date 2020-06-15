@@ -24,6 +24,6 @@ export default {
   background-color: transparent;
   border: 1px solid transparent;
   margin: 1rem 0;
-  width: 100%;
+  max-width: 600px;
 }
 </style>

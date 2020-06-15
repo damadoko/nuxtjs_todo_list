@@ -34,6 +34,7 @@ html {
 .app-wrapper {
   height: 100vh;
   width: 100vw;
+  background-color: #1d1e24;
 }
 
 *,
