@@ -18,7 +18,7 @@ export default {
 <style scoped>
 .filter {
   max-width: 600px;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   display: flex !important;
   text-align: center;
   justify-content: space-between;

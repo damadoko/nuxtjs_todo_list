@@ -13,7 +13,7 @@ export const dataMockUp = {
       ]
     },
     {
-      id: 2,
+      id: 1,
       title: "Code VueJS SPA App",
       exp: { day: "16", year: 2020, time: "16:30" },
       completed: true,
@@ -25,7 +25,7 @@ export const dataMockUp = {
       ]
     },
     {
-      id: 2,
+      id: 0,
       title: "Code React SPA App",
       exp: { day: "16", year: 2020, time: "16:30" },
       completed: true,

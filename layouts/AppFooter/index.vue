@@ -35,15 +35,16 @@ export default {
   bottom: 0;
   left: 0;
   width: 100vw;
+  height: 20%;
   text-align: center;
-  margin: 1rem 0;
 }
 
 .records-wrapper {
   max-width: 600px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   margin: 0 auto;
+  transform: translateY(50%);
 }
 </style>

@@ -19,11 +19,12 @@ export default {
 <style>
 .container {
   margin: 0 auto;
-  max-height: 60vh;
+  height: 60%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   text-align: center;
+  flex-direction: column;
 }
 
 .title {

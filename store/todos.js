@@ -1,26 +1,29 @@
 import { dataMockUp } from "./_dataMockup";
 // const initdata = localStorage.getItem("DATA_LOCAL") || dataMockUp;
-const initdata = null;
 
-if (process.browser) {
-  const localData = localStorage.getItem("DATA_LOCAL");
-  if (localData) {
-    initdata = localData;
+export const state = () => {
+  let initdata = null;
+  if (process.browser) {
+    const localData = JSON.parse(localStorage.getItem("DATA_LOCAL"));
+    if (localData) {
+      initdata = localData;
+    }
+    localStorage.setItem("LOCAL_DATA", JSON.stringify(dataMockUp));
+  } else {
+    initdata = dataMockUp;
   }
-  localStorage.setItem("LOCAL_DATA", JSON.stringify(dataMockUp));
-  initdata = dataMockUp;
-}
-
-const state = () => {
   return initdata;
 };
+// export const state = () => {
+//   return dataMockUp;
+// };
 
-const getters = {
+export const getters = {
   getTodos: state => state.todos,
   curentFilter: state => state.filter
 };
 
-const actions = {
+export const actions = {
   completeTask({ commit }, id) {
     commit("setComplete", id);
   },
@@ -41,7 +44,7 @@ const actions = {
   }
 };
 
-const mutations = {
+export const mutations = {
   setComplete: (state, id) => {
     const index = state.todos.findIndex(item => item.id === id);
     state.todos[index].completed = !state.todos[index].completed;
@@ -73,11 +76,4 @@ const mutations = {
     state.filter = status;
     // localStorage.setItem("DATA_LOCAL", JSON.stringify(state));
   }
-};
-
-export default {
-  state,
-  getters,
-  actions,
-  mutations
 };

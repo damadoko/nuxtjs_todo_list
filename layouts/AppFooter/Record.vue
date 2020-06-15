@@ -1,7 +1,7 @@
 <template>
-  <div class="record" :style="{color: findColor()}">
-    <p class="num">{{recordNumber}}</p>
-    <p class="tit">{{recordTitle}}</p>
+  <div class="record" :style="{ color: findColor() }">
+    <p class="num">{{ recordNumber }}</p>
+    <p class="tit">{{ recordTitle }}</p>
   </div>
 </template>
 
@@ -27,7 +27,6 @@ export default {
 <style scoped>
 .record {
   align-items: center;
-  margin: 0.5rem 0;
 }
 
 .num {

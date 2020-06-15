@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>Todo list</h1>
+    <h2>Todo list</h2>
     <TaskFilter />
   </header>
 </template>
@@ -19,9 +19,8 @@ header {
   top: 0;
   left: 0;
   width: 100vw;
-  min-height: 20vh;
+  height: 20%;
   text-transform: uppercase;
-  margin-bottom: 2rem;
   border-bottom: 2px solid #1ba9f5;
   transition: all 0.5s ease;
   display: flex;
@@ -30,7 +29,7 @@ header {
   flex-direction: column;
 }
 
-header h1 {
+header h2 {
   color: #1ba9f5;
   text-transform: uppercase;
 }

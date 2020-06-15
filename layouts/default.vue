@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-wrapper">
     <AppHeader />
     <nuxt />
     <AppFooter />
@@ -29,6 +29,11 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+}
+
+.app-wrapper {
+  height: 100vh;
+  width: 100vw;
 }
 
 *,
