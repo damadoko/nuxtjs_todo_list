@@ -11,8 +11,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "nuxt": "^2.0.0",
-    "vuex-persist": "^2.2.0"
+    "nuxt": "^2.0.0"
   },
   "devDependencies": {}
 }

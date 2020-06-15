@@ -1,14 +1,22 @@
 import { dataMockUp } from "./_dataMockup";
-import vuexLocal from "../plugins/vuex-persist";
 // const initdata = localStorage.getItem("DATA_LOCAL") || dataMockUp;
-const initdata = dataMockUp;
+const initdata = null;
+
+if (process.browser) {
+  const localData = localStorage.getItem("DATA_LOCAL");
+  if (localData) {
+    initdata = localData;
+  }
+  localStorage.setItem("LOCAL_DATA", JSON.stringify(dataMockUp));
+  initdata = dataMockUp;
+}
 
 const state = () => {
   return initdata;
 };
 
 const getters = {
-  allTodos: state => state.todos,
+  getTodos: state => state.todos,
   curentFilter: state => state.filter
 };
 
@@ -67,12 +75,9 @@ const mutations = {
   }
 };
 
-const plugins = [vuexLocal.plugin];
-
 export default {
   state,
   getters,
   actions,
-  mutations,
-  plugins
+  mutations
 };
