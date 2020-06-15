@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import Record from "../components/Record";
+import Record from "./Record";
 
 export default {
   name: "AppFooter",
@@ -31,12 +31,12 @@ export default {
 
 <style scoped>
 .records {
-  position: relative;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100vw;
-  min-height: 20vh;
   text-align: center;
+  margin: 1rem 0;
 }
 
 .records-wrapper {

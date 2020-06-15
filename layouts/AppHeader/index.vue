@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import TaskFilter from "../components/TaskFilter";
+import TaskFilter from "./TaskFilter";
 export default {
   name: "AppHeader",
   components: { TaskFilter }

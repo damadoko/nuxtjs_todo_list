@@ -8,7 +8,6 @@
 
 <script>
 import AppHeader from "./AppHeader";
-import TaskFilter from "../components/TaskFilter";
 import AppFooter from "./AppFooter";
 
 export default {

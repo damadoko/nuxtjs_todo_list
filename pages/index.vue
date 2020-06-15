@@ -1,15 +1,25 @@
 <template>
-  <div class="container">Hello world</div>
+  <div class="container">
+    <TodoList />
+    <TodoCtrl />
+  </div>
 </template>
 
 <script>
-export default {};
+import TodoList from "../components/TodoList";
+import TodoCtrl from "../components/TodoCtrl";
+export default {
+  components: {
+    TodoList,
+    TodoCtrl
+  }
+};
 </script>
 
 <style>
 .container {
   margin: 0 auto;
-  min-height: 100vh;
+  max-height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
