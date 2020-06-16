@@ -8,15 +8,12 @@ export const state = () => {
     if (localData) {
       initdata = localData;
     }
-    localStorage.setItem("LOCAL_DATA", JSON.stringify(dataMockUp));
+    localStorage.setItem("DATA_LOCAL", JSON.stringify(dataMockUp));
   } else {
     initdata = dataMockUp;
   }
   return initdata;
 };
-// export const state = () => {
-//   return dataMockUp;
-// };
 
 export const getters = {
   getTodos: state => state.todos,
@@ -59,12 +56,8 @@ export const mutations = {
     state.todos[index].title = data.title;
     localStorage.setItem("DATA_LOCAL", JSON.stringify(state));
   },
-  newTodo: (state, title) => {
-    const newTodo = {
-      id: state.todos[0].id + 1,
-      title: title,
-      completed: false
-    };
+  addTodo: (state, newTodo) => {
+    newTodo.id = state.todos[0].id + 1;
     state.todos.unshift(newTodo);
     localStorage.setItem("DATA_LOCAL", JSON.stringify(state));
   },

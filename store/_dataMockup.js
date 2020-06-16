@@ -3,9 +3,7 @@ export const dataMockUp = {
     {
       id: 2,
       title: "Code SSR App",
-      exp: { date: "16-06-20", time: "16:30" },
       completed: false,
-      expired: false,
       percentage: 67,
       tasks: [
         { taskID: 0, taskTitle: "Learn NuxtJS or NextJS", isDone: false },
@@ -16,9 +14,7 @@ export const dataMockUp = {
     {
       id: 1,
       title: "Code VueJS SPA App",
-      exp: { date: "16-06-20", time: "16:30" },
       completed: true,
-      expired: false,
       percentage: 100,
       tasks: [
         { taskID: 0, taskTitle: "Learn VueJS", isDone: true },
@@ -29,9 +25,7 @@ export const dataMockUp = {
     {
       id: 0,
       title: "Code React SPA App",
-      exp: { date: "16-06-20", time: "16:30" },
       completed: true,
-      expired: false,
       percentage: 100,
       tasks: [
         { taskID: 0, taskTitle: "Learn React", isDone: true },

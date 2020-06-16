@@ -16,16 +16,6 @@
             </span>
           </p>
           <p>
-            <label>Expire on:</label>
-            <span>
-              <input type="date" v-model="exp.date" />
-              <input type="time" v-model="exp.time" />
-              <span v-show="err.onExp.length" class="validate">{{
-                err.onExp
-              }}</span>
-            </span>
-          </p>
-          <p>
             <label>Process:</label>
             <span>
               <input type="text" v-model="taskTitle" />
@@ -103,14 +93,11 @@ export default {
       this.tasks = this.tasks.filter(item => item.taskID !== delID);
     },
     checkSubmition: function(todo) {
+      const d = new Date();
+
       let result = true;
       if (!todo.title.length) {
         this.err.onTitle = "Title is required!";
-        result = false;
-      }
-
-      if (!todo.exp.date.length || !todo.exp.time.length) {
-        this.err.onExp = "Date and Time are required!";
         result = false;
       }
 
@@ -125,12 +112,10 @@ export default {
       newTodo.title = this.title;
       newTodo.exp = this.exp;
       newTodo.completed = false;
-      newTodo.expired = false;
       newTodo.tasks = this.tasks;
       newTodo.percentage = 0;
       if (this.checkSubmition(newTodo)) {
-        console.log(newTodo);
-        // this.$store.commit("todos/newTodo", newTodo);
+        this.$store.commit("todos/addTodo", newTodo);
         this.close();
       }
     }

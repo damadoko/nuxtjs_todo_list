@@ -1,35 +1,28 @@
 <template>
-  <div class="todo">
-    <div class="todo-info" :class="{ done: todo.completed }">
-      <font-awesome-icon
-        v-if="todo.completed"
-        :icon="['fas', 'check-circle']"
-      />
+  <div class="task">
+    <div class="task-info">
+      <font-awesome-icon v-if="task.isDone" :icon="['fas', 'check-circle']" />
       <font-awesome-icon v-else :icon="['fas', 'check']" />
-      <p>{{ todo.title }}</p>
-      <span>{{ todo.percentage + "%" }}</span>
+      <p>{{ task.taskTitle }}</p>
     </div>
     <font-awesome-icon
       :icon="['fas', 'times']"
       class="icon-del"
-      v-show="todo.completed"
+      v-show="task.isDone"
     />
-    <nuxt-link :to="'/' + todo.id" v-show="!todo.completed">
-      <font-awesome-icon :icon="['fas', 'info']" />
-    </nuxt-link>
   </div>
 </template>
 
 <script>
-// :class="{ delete: todo.completed }"
+import { mapGetters } from "vuex";
 export default {
-  name: "Todo",
-  props: ["todo"]
+  name: "TodoDetail",
+  props: ["task"]
 };
 </script>
 
 <style scoped>
-.todo {
+.task {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -39,7 +32,6 @@ export default {
   width: 100%;
   color: #1ba9f5;
 }
-
 .done {
   color: #535966;
 }
@@ -52,7 +44,7 @@ export default {
   display: none !important;
 }
 
-.todo-info {
+.task-info {
   display: flex;
   max-width: 80%;
   text-align: center;
@@ -60,7 +52,7 @@ export default {
   align-items: center;
 }
 
-.todo-info p {
+.task-info p {
   margin-left: 2rem;
   overflow: hidden;
   text-align: justify;
@@ -75,10 +67,5 @@ export default {
   color: #535966;
   transition: all 0.25s ease-in-out;
   display: inline-block;
-}
-
-a {
-  text-decoration: none;
-  color: #1ba9f5;
 }
 </style>
