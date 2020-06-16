@@ -1,13 +1,26 @@
 <template>
   <div>
-    <button class="btn add-btn">Add Todo</button>
+    <button class="btn add-btn" @click="showModal">Add Todo</button>
     <button class="btn clear-btn">Clear completed Todo</button>
+    <NewTodoModal v-show="isModalShow" />
   </div>
 </template>
 
 <script>
+import NewTodoModal from "./NewTodoModal";
 export default {
-  name: "TodoCtrl"
+  name: "TodoCtrl",
+  components: { NewTodoModal },
+  data() {
+    return {
+      isModalShow: false
+    };
+  },
+  methods: {
+    showModal() {
+      this.isModalShow = true;
+    }
+  }
 };
 </script>
 

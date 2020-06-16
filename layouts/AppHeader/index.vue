@@ -1,15 +1,15 @@
 <template>
   <header>
     <h2>Todo list</h2>
-    <TaskFilter />
+    <TodoFilter />
   </header>
 </template>
 
 <script>
-import TaskFilter from "./TaskFilter";
+import TodoFilter from "./TodoFilter";
 export default {
   name: "AppHeader",
-  components: { TaskFilter }
+  components: { TodoFilter }
 };
 </script>
 
