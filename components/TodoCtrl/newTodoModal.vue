@@ -84,19 +84,23 @@ export default {
       this.$emit("close");
     },
     addTask: function() {
-      const newTask = {};
-      // NewID = lastElement ID + 1 or NewId = 0 if Tasks array is empty
-      newTask.taskID = this.tasks.length
-        ? this.tasks[this.tasks.length - 1].taskID + 1
-        : 0;
-      newTask.taskTitle = this.taskTitle;
-      newTask.isDone = false;
-      this.tasks = [...this.tasks, newTask];
-      this.taskTitle = "";
+      if (this.taskTitle.length) {
+        const newTask = {};
+        // NewID = lastElement ID + 1 or NewId = 0 if Tasks array is empty
+        newTask.taskID = this.tasks.length
+          ? this.tasks[this.tasks.length - 1].taskID + 1
+          : 0;
+        newTask.taskTitle = this.taskTitle;
+        newTask.isDone = false;
+        this.tasks = [...this.tasks, newTask];
+        this.taskTitle = "";
+        this.err.onProcess = "";
+      } else {
+        this.err.onProcess = "Invalid task!";
+      }
     },
     delTask: function(delID) {
-      console.log(delID);
-      // this.tasks = this.tasks.filter(item => item.taskID !== delID);
+      this.tasks = this.tasks.filter(item => item.taskID !== delID);
     },
     checkSubmition: function(todo) {
       let result = true;
@@ -123,10 +127,12 @@ export default {
       newTodo.completed = false;
       newTodo.expired = false;
       newTodo.tasks = this.tasks;
+      newTodo.percentage = 0;
       if (this.checkSubmition(newTodo)) {
         console.log(newTodo);
+        // this.$store.commit("todos/newTodo", newTodo);
+        this.close();
       }
-      // this.$store.commit("todos/newTodo", newTodo);
     }
   }
 };

@@ -6,8 +6,9 @@ export const dataMockUp = {
       exp: { date: "16-06-20", time: "16:30" },
       completed: false,
       expired: false,
+      percentage: 67,
       tasks: [
-        { taskID: 0, taskTitle: "Learn NuxtJS or NextJS", isDone: true },
+        { taskID: 0, taskTitle: "Learn NuxtJS or NextJS", isDone: false },
         { taskID: 1, taskTitle: "Learn basic SEO", isDone: true },
         { taskID: 2, taskTitle: "Finish App", isDone: true }
       ]
@@ -18,6 +19,7 @@ export const dataMockUp = {
       exp: { date: "16-06-20", time: "16:30" },
       completed: true,
       expired: false,
+      percentage: 100,
       tasks: [
         { taskID: 0, taskTitle: "Learn VueJS", isDone: true },
         { taskID: 1, taskTitle: "Learn Vuex", isDone: true },
@@ -30,6 +32,7 @@ export const dataMockUp = {
       exp: { date: "16-06-20", time: "16:30" },
       completed: true,
       expired: false,
+      percentage: 100,
       tasks: [
         { taskID: 0, taskTitle: "Learn React", isDone: true },
         { taskID: 1, taskTitle: "Learn Redux", isDone: true },

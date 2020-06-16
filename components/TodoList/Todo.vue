@@ -7,16 +7,19 @@
       />
       <font-awesome-icon v-else :icon="['fas', 'check']" />
       <p>{{ todo.title }}</p>
+      <span>{{ todo.percentage + "%" }}</span>
     </div>
     <font-awesome-icon
       :icon="['fas', 'times']"
       class="icon-del"
-      :class="{ delete: todo.completed }"
+      v-show="todo.completed"
     />
+    <font-awesome-icon :icon="['fas', 'info']" v-show="!todo.completed" />
   </div>
 </template>
 
 <script>
+// :class="{ delete: todo.completed }"
 export default {
   name: "Todo",
   props: ["todo"]
@@ -68,8 +71,7 @@ export default {
 
 .icon-del {
   color: #535966;
-  margin-right: 0.5rem;
   transition: all 0.25s ease-in-out;
-  display: none;
+  display: inline-block;
 }
 </style>
