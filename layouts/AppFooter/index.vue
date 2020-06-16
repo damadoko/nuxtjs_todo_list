@@ -37,6 +37,7 @@ export default {
   width: 100vw;
   height: 20%;
   text-align: center;
+  z-index: 0;
 }
 
 .records-wrapper {

@@ -2,7 +2,7 @@
   <div>
     <button class="btn add-btn" @click="showModal">Add Todo</button>
     <button class="btn clear-btn">Clear completed Todo</button>
-    <NewTodoModal v-show="isModalShow" />
+    <NewTodoModal v-show="isModalShow" @close="closeModal" />
   </div>
 </template>
 
@@ -19,6 +19,9 @@ export default {
   methods: {
     showModal() {
       this.isModalShow = true;
+    },
+    closeModal() {
+      this.isModalShow = false;
     }
   }
 };

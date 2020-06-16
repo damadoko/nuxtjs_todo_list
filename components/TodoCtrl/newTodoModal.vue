@@ -8,23 +8,43 @@
         <form>
           <p>
             <label>Todo title:</label>
-            <input type="text" />
+            <span>
+              <input type="text" v-model="title" />
+              <span v-show="err.onTitle.length" class="validate">{{
+                err.onTitle
+              }}</span>
+            </span>
           </p>
           <p>
             <label>Expire on:</label>
-            <input type="date" />
-            <input type="time" />
+            <span>
+              <input type="date" v-model="exp.date" />
+              <input type="time" v-model="exp.time" />
+              <span v-show="err.onExp.length" class="validate">{{
+                err.onExp
+              }}</span>
+            </span>
           </p>
           <p>
             <label>Process:</label>
-            <input type="text" />
+            <span>
+              <input type="text" v-model="taskTitle" />
+              <font-awesome-icon
+                :icon="['fas', 'plus-circle']"
+                class="add-task"
+                @click="addTask"
+              />
+              <span v-show="err.onProcess.length" class="validate">{{
+                err.onProcess
+              }}</span>
+            </span>
           </p>
         </form>
-        <TaskList :tasks="tasks" />
+        <TaskList :tasks="tasks" @delTask="delTask" />
       </section>
       <footer class="modal-footer">
-        <button>Cancel</button>
-        <button>Save</button>
+        <button @click="close">Cancel</button>
+        <button @click="onSubmitTodo">Save</button>
       </footer>
     </div>
   </div>
@@ -38,10 +58,76 @@ export default {
   components: { TaskList },
   data() {
     return {
+      err: {
+        onTitle: "",
+        onExp: "",
+        onProcess: ""
+      },
       title: "",
-      exp: { year: "", day: "", time: "" },
-      tasks: []
+      exp: { date: "", time: "" },
+      tasks: [],
+      taskTitle: ""
     };
+  },
+  methods: {
+    resetForm: function() {
+      this.title = "";
+      this.exp = { date: "", time: "" };
+      this.tasks = [];
+      this.taskTitle = "";
+      this.err.onTitle = "";
+      this.err.onExp = "";
+      this.err.onProcess = "";
+    },
+    close: function() {
+      this.resetForm();
+      this.$emit("close");
+    },
+    addTask: function() {
+      const newTask = {};
+      // NewID = lastElement ID + 1 or NewId = 0 if Tasks array is empty
+      newTask.taskID = this.tasks.length
+        ? this.tasks[this.tasks.length - 1].taskID + 1
+        : 0;
+      newTask.taskTitle = this.taskTitle;
+      newTask.isDone = false;
+      this.tasks = [...this.tasks, newTask];
+      this.taskTitle = "";
+    },
+    delTask: function(delID) {
+      console.log(delID);
+      // this.tasks = this.tasks.filter(item => item.taskID !== delID);
+    },
+    checkSubmition: function(todo) {
+      let result = true;
+      if (!todo.title.length) {
+        this.err.onTitle = "Title is required!";
+        result = false;
+      }
+
+      if (!todo.exp.date.length || !todo.exp.time.length) {
+        this.err.onExp = "Date and Time are required!";
+        result = false;
+      }
+
+      if (!todo.tasks.length) {
+        this.err.onProcess = "At least one task is required!";
+        result = false;
+      }
+      return result;
+    },
+    onSubmitTodo: function() {
+      const newTodo = {};
+      newTodo.title = this.title;
+      newTodo.exp = this.exp;
+      newTodo.completed = false;
+      newTodo.expired = false;
+      newTodo.tasks = this.tasks;
+      if (this.checkSubmition(newTodo)) {
+        console.log(newTodo);
+      }
+      // this.$store.commit("todos/newTodo", newTodo);
+    }
   }
 };
 </script>
@@ -53,10 +139,11 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
 .modal {
@@ -65,6 +152,7 @@ export default {
   overflow-x: auto;
   display: flex;
   flex-direction: column;
+  min-width: 400px;
 }
 
 .modal-header,
@@ -87,7 +175,7 @@ export default {
 .modal-footer button {
   display: inline-block;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 2rem;
   border-radius: 5px;
   margin: 0 0.5rem;
   font-weight: bold;
@@ -115,7 +203,27 @@ export default {
 form {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+}
+
+form p {
+  display: flex;
+}
+
+form p > span {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 0.5rem;
+}
+
+form p:first-child > span {
+  grid-template-columns: 1fr;
+}
+
+span[class="validate"] {
+  font-size: 0.75rem;
+  color: #ffce7a;
+  text-align: left;
+  margin-top: 0.25rem;
 }
 
 label {
@@ -124,5 +232,11 @@ label {
   width: 90px;
   margin-right: 1rem;
   color: #ffffff;
+}
+
+.add-task {
+  color: #7de2d1;
+  background-color: #ffffff;
+  border-radius: 50%;
 }
 </style>

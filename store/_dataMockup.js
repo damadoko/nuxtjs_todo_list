@@ -3,37 +3,37 @@ export const dataMockUp = {
     {
       id: 2,
       title: "Code SSR App",
-      exp: { day: "16", year: 2020, time: "16:30" },
+      exp: { date: "16-06-20", time: "16:30" },
       completed: false,
       expired: false,
       tasks: [
-        { taskTitle: "Learn NuxtJS or NextJS", isDone: true },
-        { taskTitle: "Learn basic SEO", isDone: true },
-        { taskTitle: "Finish App", isDone: true }
+        { taskID: 0, taskTitle: "Learn NuxtJS or NextJS", isDone: true },
+        { taskID: 1, taskTitle: "Learn basic SEO", isDone: true },
+        { taskID: 2, taskTitle: "Finish App", isDone: true }
       ]
     },
     {
       id: 1,
       title: "Code VueJS SPA App",
-      exp: { day: "16", year: 2020, time: "16:30" },
+      exp: { date: "16-06-20", time: "16:30" },
       completed: true,
       expired: false,
       tasks: [
-        { taskTitle: "Learn VueJS", isDone: true },
-        { taskTitle: "Learn Vuex", isDone: true },
-        { taskTitle: "Finish App", isDone: true }
+        { taskID: 0, taskTitle: "Learn VueJS", isDone: true },
+        { taskID: 1, taskTitle: "Learn Vuex", isDone: true },
+        { taskID: 2, taskTitle: "Finish App", isDone: true }
       ]
     },
     {
       id: 0,
       title: "Code React SPA App",
-      exp: { day: "16", year: 2020, time: "16:30" },
+      exp: { date: "16-06-20", time: "16:30" },
       completed: true,
       expired: false,
       tasks: [
-        { taskTitle: "Learn React", isDone: true },
-        { taskTitle: "Learn Redux", isDone: true },
-        { taskTitle: "Finish App", isDone: true }
+        { taskID: 0, taskTitle: "Learn React", isDone: true },
+        { taskID: 1, taskTitle: "Learn Redux", isDone: true },
+        { taskID: 2, taskTitle: "Finish App", isDone: true }
       ]
     }
   ],
