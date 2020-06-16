@@ -2,16 +2,23 @@
   <div class="filter">
     <label>Filter by:</label>
     <div class="btn-group">
-      <button type="button" class="all">All</button>
-      <button type="button" class="done">Done</button>
-      <button type="button" class="remain">Remain</button>
+      <button type="button" class="all" @click="filter('all')">All</button>
+      <button type="button" class="done" @click="filter('done')">Done</button>
+      <button type="button" class="remain" @click="filter('remain')">
+        Remain
+      </button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "TaskFilter"
+  name: "TaskFilter",
+  methods: {
+    filter: function(status) {
+      this.$store.commit("todos/changeFilter", status);
+    }
+  }
 };
 </script>
 

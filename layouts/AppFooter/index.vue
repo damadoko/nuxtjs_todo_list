@@ -13,18 +13,19 @@
 
 <script>
 import Record from "./Record";
+import { mapGetters } from "vuex";
 
 export default {
   name: "AppFooter",
   components: { Record },
+  computed: mapGetters({ getRecord: "todos/getRecord" }),
   data() {
     return {
-      records: {
-        all: 5,
-        done: 3,
-        remain: 2
-      }
+      records: {}
     };
+  },
+  created: function() {
+    this.records = this.getRecord;
   }
 };
 </script>

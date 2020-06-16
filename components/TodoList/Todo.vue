@@ -1,11 +1,16 @@
 <template>
-  <div class="todo">
+  <div class="todo" :class="{ hide: taskFilter() }">
     <div class="todo-info" :class="{ done: todo.completed }">
       <font-awesome-icon
         v-if="todo.completed"
         :icon="['fas', 'check-circle']"
+        @click="completeTodo"
       />
-      <font-awesome-icon v-else :icon="['fas', 'check']" />
+      <font-awesome-icon
+        v-else
+        :icon="['fas', 'check']"
+        @click="completeTodo"
+      />
       <p>{{ todo.title }}</p>
       <span>{{ todo.percentage + "%" }}</span>
     </div>
@@ -13,6 +18,7 @@
       :icon="['fas', 'times']"
       class="icon-del"
       v-show="todo.completed"
+      @click="deleteTodo"
     />
     <nuxt-link :to="'/' + todo.id" v-show="!todo.completed">
       <font-awesome-icon :icon="['fas', 'info']" />
@@ -22,9 +28,28 @@
 
 <script>
 // :class="{ delete: todo.completed }"
+import { mapGetters } from "vuex";
 export default {
   name: "Todo",
-  props: ["todo"]
+  props: ["todo"],
+  computed: mapGetters({ curentFilter: "todos/curentFilter" }),
+  methods: {
+    completeTodo: function() {
+      this.$store.commit("todos/setComplete", this.todo.id);
+    },
+    deleteTodo: function() {
+      this.$store.commit("todos/deleteTodo", this.todo.id);
+    },
+    taskFilter: function() {
+      if (
+        (this.curentFilter === "done" && !this.todo.completed) ||
+        (this.curentFilter === "remain" && this.todo.completed)
+      ) {
+        return true;
+      }
+      return false;
+    }
+  }
 };
 </script>
 

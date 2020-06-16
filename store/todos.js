@@ -1,4 +1,5 @@
 import { dataMockUp } from "./_dataMockup";
+
 // const initdata = localStorage.getItem("DATA_LOCAL") || dataMockUp;
 
 export const state = () => {
@@ -17,34 +18,33 @@ export const state = () => {
 
 export const getters = {
   getTodos: state => state.todos,
-  curentFilter: state => state.filter
-};
+  curentFilter: state => state.filter,
+  getRecord: state => {
+    const status = {};
+    status.all = state.todos.length;
+    status.done = state.todos.filter(item => item.completed).length;
+    status.remain = state.todos.filter(item => !item.completed).length;
 
-export const actions = {
-  completeTask({ commit }, id) {
-    commit("setComplete", id);
+    return status;
   },
-  deleteTask({ commit }, id) {
-    commit("deleteTodo", id);
-  },
-  updateTask({ commit }, data) {
-    commit("updateTodo", data);
-  },
-  addNew({ commit }, title) {
-    commit("newTodo", title);
-  },
-  clearDonetask({ commit }) {
-    commit("clear");
-  },
-  changeFilter({ commit }, status) {
-    commit("filterTask", status);
+  getSelectedTodo: state => id => {
+    return state.todos.filter(item => item.id === id);
   }
 };
 
 export const mutations = {
   setComplete: (state, id) => {
     const index = state.todos.findIndex(item => item.id === id);
+    // Change todo complete status
     state.todos[index].completed = !state.todos[index].completed;
+    // Change Tasks complete status && percentage
+    if (state.todos[index].completed) {
+      state.todos[index].tasks.map(item => (item.isDone = true));
+      state.todos[index].percentage = 100;
+    } else {
+      state.todos[index].tasks.map(item => (item.isDone = false));
+      state.todos[index].percentage = 0;
+    }
     localStorage.setItem("DATA_LOCAL", JSON.stringify(state));
   },
   deleteTodo: (state, id) => {
@@ -61,12 +61,22 @@ export const mutations = {
     state.todos.unshift(newTodo);
     localStorage.setItem("DATA_LOCAL", JSON.stringify(state));
   },
-  clear: state => {
+  clearDoneTask: state => {
     state.todos = state.todos.filter(item => !item.completed);
     localStorage.setItem("DATA_LOCAL", JSON.stringify(state));
   },
-  filterTask: (state, status) => {
+  changeFilter: (state, status) => {
     state.filter = status;
     // localStorage.setItem("DATA_LOCAL", JSON.stringify(state));
+  },
+  delTask: (state, loadID) => {
+    const index = state.todos.findIndex(item => item.id === loadID.todoID);
+    console.log(
+      state.todos[index].tasks.filter(item => item.taskID !== loadID.taskID)
+    );
+    state.todos[index].tasks = state.todos[index].tasks.filter(
+      item => item.taskID !== loadID.taskID
+    );
+    localStorage.setItem("DATA_LOCAL", JSON.stringify(state));
   }
 };

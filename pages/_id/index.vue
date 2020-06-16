@@ -2,7 +2,12 @@
   <div class="container">
     <h1>{{ title }}</h1>
     <div class="detail-list">
-      <TodoDetail v-for="task in tasks" :key="task.taskId" :task="task" />
+      <TodoDetail
+        v-for="task in tasks"
+        :key="task.taskId"
+        :task="task"
+        :todoID="id"
+      />
     </div>
     <button>&#8592; Back</button>
   </div>
@@ -13,25 +18,34 @@ import { mapGetters } from "vuex";
 import TodoDetail from "../../components/TodoDetail";
 export default {
   components: { TodoDetail },
-  computed: mapGetters({
-    getTodos: "todos/getTodos"
-  }),
+  computed: {
+    ...mapGetters({
+      getTodos: "todos/getTodos",
+      getSelectedTodo: "todos/getSelectedTodo"
+    }),
+    selectedTodo() {
+      return id => this.getSelectedTodo(id);
+    }
+  },
   data() {
     return {
+      id: null,
       title: "",
-      tasks: [],
+      tasks: this.$store.getters.getSelectedTodo(
+        parseInt(this.$route.params.id)
+      ),
       percentage: 0
     };
-  },
-  created: function() {
-    const todo = this.getTodos.filter(
-      item => item.id === parseInt(this.$route.params.id)
-    );
-    this.title = todo[0].title;
-    this.tasks = todo[0].tasks;
-    this.percentage = todo[0].percentage;
-    console.log(todo[0].tasks);
   }
+  // created: function() {
+  //   const todo = this.getTodos.filter(
+  //     item => item.id === parseInt(this.$route.params.id)
+  //   );
+  //   this.id = todo[0].id;
+  //   this.title = todo[0].title;
+  //   this.tasks = todo[0].tasks;
+  //   this.percentage = todo[0].percentage;
+  // }
 };
 </script>
 

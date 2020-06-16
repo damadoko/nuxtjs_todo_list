@@ -1,7 +1,7 @@
 <template>
   <div>
     <button class="btn add-btn" @click="showModal">Add Todo</button>
-    <button class="btn clear-btn">Clear completed Todo</button>
+    <button class="btn clear-btn" @click="clear">Clear completed Todo</button>
     <NewTodoModal v-show="isModalShow" @close="closeModal" />
   </div>
 </template>
@@ -17,11 +17,14 @@ export default {
     };
   },
   methods: {
-    showModal() {
+    showModal: function() {
       this.isModalShow = true;
     },
-    closeModal() {
+    closeModal: function() {
       this.isModalShow = false;
+    },
+    clear: function() {
+      this.$store.commit("todos/clearDoneTask");
     }
   }
 };

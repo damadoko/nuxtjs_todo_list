@@ -1,6 +1,6 @@
 <template>
   <div class="task">
-    <div class="task-info">
+    <div class="task-info" :class="{ done: task.isDone }">
       <font-awesome-icon v-if="task.isDone" :icon="['fas', 'check-circle']" />
       <font-awesome-icon v-else :icon="['fas', 'check']" />
       <p>{{ task.taskTitle }}</p>
@@ -9,6 +9,7 @@
       :icon="['fas', 'times']"
       class="icon-del"
       v-show="task.isDone"
+      @click="delTask"
     />
   </div>
 </template>
@@ -17,7 +18,16 @@
 import { mapGetters } from "vuex";
 export default {
   name: "TodoDetail",
-  props: ["task"]
+  props: ["task", "todoID"],
+  methods: {
+    delTask: function() {
+      const loadID = {
+        todoID: this.todoID,
+        taskID: this.task.taskID
+      };
+      this.$store.commit("todos/delTask", loadID);
+    }
+  }
 };
 </script>
 
