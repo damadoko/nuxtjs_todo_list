@@ -1,15 +1,16 @@
 <template>
   <div class="container">
-    <h1>{{ title }}</h1>
+    <h1>{{ selectedTodo.title }}</h1>
+    <span>Process: {{ selectedTodo.percentage }}%</span>
     <div class="detail-list">
       <TodoDetail
-        v-for="task in tasks"
+        v-for="task in selectedTodo.tasks"
         :key="task.taskId"
         :task="task"
-        :todoID="id"
+        :todoID="selectedTodo.id"
       />
     </div>
-    <button>&#8592; Back</button>
+    <button @click="$router.go(-1)">&#8592; Back</button>
   </div>
 </template>
 
@@ -20,32 +21,15 @@ export default {
   components: { TodoDetail },
   computed: {
     ...mapGetters({
-      getTodos: "todos/getTodos",
       getSelectedTodo: "todos/getSelectedTodo"
     }),
-    selectedTodo() {
-      return id => this.getSelectedTodo(id);
+    selectedTodo: function() {
+      return this.getSelectedTodo(parseInt(this.$route.params.id));
     }
   },
-  data() {
-    return {
-      id: null,
-      title: "",
-      tasks: this.$store.getters.getSelectedTodo(
-        parseInt(this.$route.params.id)
-      ),
-      percentage: 0
-    };
+  created: function() {
+    this.$store.commit("todos/changeFilter", "all");
   }
-  // created: function() {
-  //   const todo = this.getTodos.filter(
-  //     item => item.id === parseInt(this.$route.params.id)
-  //   );
-  //   this.id = todo[0].id;
-  //   this.title = todo[0].title;
-  //   this.tasks = todo[0].tasks;
-  //   this.percentage = todo[0].percentage;
-  // }
 };
 </script>
 
@@ -57,6 +41,7 @@ export default {
   align-items: center;
   text-align: center;
   flex-direction: column;
+  justify-content: flex-start;
 }
 .detail-list {
   max-height: 80%;
@@ -69,7 +54,7 @@ export default {
 
 h1 {
   color: #1ba9f5;
-  margin-top: 1rem;
+  margin: 1rem 0;
 }
 
 button {
@@ -83,5 +68,10 @@ button {
   position: absolute;
   top: 25%;
   left: 5%;
+}
+
+span {
+  color: #1ba9f5;
+  font-weight: bold;
 }
 </style>

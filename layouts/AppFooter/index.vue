@@ -1,8 +1,17 @@
 <template>
   <div class="records">
-    <div class="records-wrapper">
+    <div class="records-wrapper" v-if="typeof getRoute === 'undefined'">
       <Record
-        v-for="(value, key, index) in records"
+        v-for="(value, key, index) in todoRecords"
+        :key="index"
+        :recordTitle="key"
+        :recordNumber="value"
+      />
+    </div>
+
+    <div class="records-wrapper" v-else>
+      <Record
+        v-for="(value, key, index) in taskRecords"
         :key="index"
         :recordTitle="key"
         :recordNumber="value"
@@ -18,14 +27,17 @@ import { mapGetters } from "vuex";
 export default {
   name: "AppFooter",
   components: { Record },
-  computed: mapGetters({ getRecord: "todos/getRecord" }),
-  data() {
-    return {
-      records: {}
-    };
-  },
-  created: function() {
-    this.records = this.getRecord;
+  computed: {
+    ...mapGetters({
+      todoRecords: "todos/getTodoRecord",
+      getTaskRecord: "todos/getTaskRecord"
+    }),
+    getRoute: function() {
+      return this.$route.params.id;
+    },
+    taskRecords: function() {
+      return this.getTaskRecord(this.getRoute);
+    }
   }
 };
 </script>

@@ -1,8 +1,16 @@
 <template>
-  <div class="task">
+  <div class="task" :class="{ hide: taskFilter() }">
     <div class="task-info" :class="{ done: task.isDone }">
-      <font-awesome-icon v-if="task.isDone" :icon="['fas', 'check-circle']" />
-      <font-awesome-icon v-else :icon="['fas', 'check']" />
+      <font-awesome-icon
+        v-if="task.isDone"
+        :icon="['fas', 'check-circle']"
+        @click="completeTask"
+      />
+      <font-awesome-icon
+        v-else
+        :icon="['fas', 'check']"
+        @click="completeTask"
+      />
       <p>{{ task.taskTitle }}</p>
     </div>
     <font-awesome-icon
@@ -19,6 +27,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "TodoDetail",
   props: ["task", "todoID"],
+  computed: mapGetters({ curentFilter: "todos/curentFilter" }),
   methods: {
     delTask: function() {
       const loadID = {
@@ -26,6 +35,22 @@ export default {
         taskID: this.task.taskID
       };
       this.$store.commit("todos/delTask", loadID);
+    },
+    completeTask: function() {
+      const loadID = {
+        todoID: this.todoID,
+        taskID: this.task.taskID
+      };
+      this.$store.commit("todos/completeTask", loadID);
+    },
+    taskFilter: function() {
+      if (
+        (this.curentFilter === "done" && !this.task.isDone) ||
+        (this.curentFilter === "remain" && this.task.isDone)
+      ) {
+        return true;
+      }
+      return false;
     }
   }
 };

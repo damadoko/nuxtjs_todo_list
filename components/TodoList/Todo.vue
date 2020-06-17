@@ -27,7 +27,6 @@
 </template>
 
 <script>
-// :class="{ delete: todo.completed }"
 import { mapGetters } from "vuex";
 export default {
   name: "Todo",
@@ -49,6 +48,9 @@ export default {
       }
       return false;
     }
+  },
+  created: function() {
+    this.$store.commit("todos/changeFilter", "all");
   }
 };
 </script>
