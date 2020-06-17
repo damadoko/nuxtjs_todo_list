@@ -65,10 +65,6 @@ export const mutations = {
   deleteTodo: (state, id) => {
     state.todos = state.todos.filter(item => item.id !== id);
   },
-  updateTodo: (state, data) => {
-    const index = state.todos.findIndex(item => item.id === data.id);
-    state.todos[index].title = data.title;
-  },
   addTodo: (state, newTodo) => {
     newTodo.id = state.todos[0].id + 1;
     state.todos.unshift(newTodo);

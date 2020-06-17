@@ -29,6 +29,9 @@ export default {
   },
   created: function() {
     this.$store.commit("todos/changeFilter", "all");
+  },
+  head: {
+    title: "Your Todo Detail"
   }
 };
 </script>
