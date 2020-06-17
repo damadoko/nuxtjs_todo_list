@@ -9,11 +9,25 @@
 <script>
 import AppHeader from "./AppHeader";
 import AppFooter from "./AppFooter";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
     AppHeader,
     AppFooter
+  },
+  computed: mapGetters({ state: "todos/getState" }),
+
+  beforeCreate: function() {
+    this.$store.dispatch("todos/fetchInitData");
+  },
+  watch: {
+    state: {
+      handler: function(newState, oldState) {
+        this.$store.dispatch("todos/updateState", newState);
+      },
+      deep: true
+    }
   }
 };
 </script>

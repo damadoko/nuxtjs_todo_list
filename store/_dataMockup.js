@@ -21,17 +21,6 @@ export const dataMockUp = {
         { taskID: 1, taskTitle: "Learn Vuex", isDone: true },
         { taskID: 2, taskTitle: "Finish App", isDone: true }
       ]
-    },
-    {
-      id: 0,
-      title: "Code React SPA App",
-      completed: true,
-      percentage: 100,
-      tasks: [
-        { taskID: 0, taskTitle: "Learn React", isDone: true },
-        { taskID: 1, taskTitle: "Learn Redux", isDone: true },
-        { taskID: 2, taskTitle: "Finish App", isDone: true }
-      ]
     }
   ],
   filter: "all" //all, done, remain

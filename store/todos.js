@@ -1,15 +1,15 @@
 import { dataMockUp } from "./_dataMockup";
+import axios from "axios";
 
 export const state = () => {
   return dataMockUp;
 };
 
 export const getters = {
+  getState: state => state,
   getTodos: state => state.todos,
   curentFilter: state => state.filter,
   getTodoRecord: state => {
-    console.log(process.env.VUE_ENV);
-
     return {
       all: state.todos.length,
       done: state.todos.filter(item => item.completed).length,
@@ -29,7 +29,26 @@ export const getters = {
   }
 };
 
+export const actions = {
+  async fetchInitData({ commit }) {
+    const firebaseStore = await axios.get(
+      "https://todo-list-nuxtjs.firebaseio.com/store/-MA0B8hQmZyJTGwfVb2x.json"
+    );
+    commit("setInitState", firebaseStore.data);
+  },
+  async updateState({ commit }, newState) {
+    const updatedState = await axios.put(
+      "https://todo-list-nuxtjs.firebaseio.com/store/-MA0B8hQmZyJTGwfVb2x.json",
+      newState
+    );
+  }
+};
+
 export const mutations = {
+  setInitState: (state, data) => {
+    state.todos = data.todos;
+    state.filter = data.filter;
+  },
   setComplete: (state, id) => {
     const index = state.todos.findIndex(item => item.id === id);
     // Change todo complete status
